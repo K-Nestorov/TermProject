@@ -1,0 +1,72 @@
+﻿@using TermProject.ViewModels.Products
+@model TermProject.ViewModels.Products.IndexVM
+
+@{
+    this.Layout = "/Views/Shared/_Site.cshtml";
+    ViewData["Title"] = "Home Page";
+}
+
+@Html.LabelFor(m => m.FilterProductsVM.ProductCategoryId, "Product Category")
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Get))
+{
+    @Html.DropDownListFor(
+                        m => m.FilterProductsVM.ProductCategoryId,
+                        new SelectList(new[]
+                        {
+                    new { Value = "", Text = "All Categories" },
+                    new { Value = "Boots", Text = "Boots" },
+                    new { Value = "Jacket", Text = "Jacket" },
+                    new { Value = "Sweater", Text = "Sweater" }
+                }, "Value", "Text", Model.FilterProductsVM.ProductCategoryId),
+                        new { id = "ddlItemsPerPage", onchange = "this.form.submit();" }
+                    )
+
+    <!-- Search Bar -->
+    <div>
+        @Html.LabelFor(m => m.FilterProductsVM.ProductName, "Search Product By Name")
+        @Html.TextBoxFor(m => m.FilterProductsVM.ProductName, new { placeholder = "Search by product name", onchange = "this.form.submit();" })
+    </div>
+}
+
+@if (Model.Items != null && Model.Items.Any())
+{
+    var filteredItems = Model.Items;
+
+    // Filter by category if selected
+    if (!string.IsNullOrEmpty(Model.FilterProductsVM.ProductCategoryId))
+    {
+        filteredItems = filteredItems.Where(item => item.ProductCategoryId == Model.FilterProductsVM.ProductCategoryId).ToList();
+    }
+
+    // Filter by product name if search query is provided
+    if (!string.IsNullOrEmpty(Model.FilterProductsVM.ProductName))
+    {
+        filteredItems = filteredItems.Where(item => item.ProductName.Contains(Model.FilterProductsVM.ProductName, StringComparison.OrdinalIgnoreCase)).ToList();
+    }
+
+    if (filteredItems.Any())
+    {
+        foreach (var item in filteredItems)
+        {
+            <div>Product ID: @item.Id</div>
+            <img src="/Images/@item.ImagePath" alt="Product Image" width="300px" height="200px" />
+            <div>Product Name: @item.ProductName</div>
+            <div>Price: @item.ProductPrice.ToString("C")</div>
+
+            <!-- Add to Cart Button -->
+            <form action="/Cart/Add" method="post">
+                <input type="hidden" name="ClickedId" value="@item.Id" />
+                <button type="submit">Add to Cart</button>
+            </form>
+        }
+    }
+    else
+    {
+        <p>No products available for the selected category or search criteria.</p>
+    }
+}
+else
+{
+    <p>No products available.</p>
+}

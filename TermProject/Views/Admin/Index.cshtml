@@ -1,0 +1,42 @@
+﻿@model TermProject.ViewModels.AdminViewModels.AdminIndexVM
+@using TermProject.Entities
+@{
+    this.Layout = "/Views/Shared/_Site.cshtml";
+    ViewData["title"] = "USERS Admin View";
+
+}
+<div>
+    
+        <a href="/Admin/CreateUser">New</a>
+        <div class="grid">
+            <div class="row">
+                
+                <div class="col-2"></div>
+            </div>
+            @foreach (Users item in Model.Items)
+            {
+                <div class="row">
+                <div class="col-1">name</div>
+                    <div class="col-2">@item.Name</div>
+                <div class="col-1">Username</div>
+                    <div class="col-1">@item.Username</div>
+                <div class="col-1">Email</div>
+                    <div class="col-2">@item.Email</div>
+                <div class="col-1">Role</div>
+                    <div class="col-2">@item.Role</div>
+                    <div class="col-2">
+
+                        <a href="/Admin/AdminEdit?Id=@item.Id">Edit </a>
+                        <a href="/Admin/Delete?Id=@item.Id">Delete</a>
+
+                    </div>
+                </div>
+            }
+        <div class="row pager">
+            <div class="col-3">
+                @{
+                    Html.RenderPartial("/Views/Partial/PagerPartial.cshtml", Model.Pager);
+                }
+            </div>
+        </div>
+        

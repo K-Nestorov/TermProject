@@ -1,0 +1,53 @@
+﻿@model TermProject.ViewModels.Products.CreateVM
+@{
+    this.Layout = "/Views/Shared/_Site.cshtml";
+    ViewData["Title"] = "Admin Create Product PAGE";
+}
+
+<fieldset>
+    <legend>Create Product</legend>
+    <form action="/Admin/AdminProductCreate" method="post" enctype="multipart/form-data">
+        <div>@Html.LabelFor(m => m.ProductName)</div>
+        <div>@Html.TextBoxFor(m => m.ProductName)</div>
+        <div class="ValidationMessage">@Html.ValidationMessageFor(m => m.ProductName)</div>
+
+        <div>@Html.LabelFor(m => m.ProductDescription)</div>
+        <div>@Html.TextBoxFor(m => m.ProductDescription)</div>
+        <div class="ValidationMessage">@Html.ValidationMessageFor(m => m.ProductDescription)</div>
+
+        <div>@Html.LabelFor(m => m.ProductPrice)</div>
+        <div>@Html.TextBoxFor(m => m.ProductPrice)</div>
+        <div class="ValidationMessage">@Html.ValidationMessageFor(m => m.ProductPrice)</div>
+
+        <div>
+            @Html.LabelFor(m => m.ProductCategoryId, "Product Category")
+        </div>
+
+        <!-- CheckBox for filtering products -->
+        <div>
+            @Html.LabelFor(m => m.ProductCategoryId, "Product Category")
+            @Html.DropDownListFor(
+                     m => m.ProductCategoryId,
+                     new SelectList(new[]
+                     {
+            new { Value = "Boots", Text = "Boots" },
+            new { Value = "Jacket", Text = "Jacket" },
+            new { Value = "Sweater", Text = "Sweater" }
+            }, "Value", "Text"),
+                     "Select a Category",
+                     new { id = "ddlItemsPerPage" }
+                     )
+                    
+        </div>
+
+ 
+
+        <div class="ValidationMessage">@Html.ValidationMessageFor(m => m.ProductCategoryId)</div>
+
+        <div>@Html.LabelFor(m => m.ImagePath)</div>
+        <div><input type="file" name="ImagePath" /></div>
+        <div class="ValidationMessage">@Html.ValidationMessageFor(m => m.ImagePath)</div>
+
+        <input type="submit" value="Create Product" />
+    </form>
+</fieldset>

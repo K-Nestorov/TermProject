@@ -1,0 +1,29 @@
+﻿@model TermProject.ViewModels.AdminViewModels.AdminEditVM
+<form action="@Url.Action("AdminEdit", "Admin")" method="post">
+
+    @Html.HiddenFor(m => m.Id)
+    <div>
+        <label>@Html.LabelFor(m => m.Username)</label>
+        @Html.TextBoxFor(m => m.Username)
+        @Html.ValidationMessageFor(m=>m.Username)
+    </div>
+    <div>
+        <label>@Html.LabelFor(m => m.Name)</label>
+        @Html.TextBoxFor(m => m.Name)
+        @Html.ValidationMessageFor(m => m.Name)
+    </div>
+    <div>
+        <label>@Html.LabelFor(m => m.Email)</label>
+        @Html.TextBoxFor(m => m.Email)
+        @Html.ValidationMessageFor(m => m.Email)
+    </div>
+    <div>
+        <label>@Html.LabelFor(m => m.Role)</label>
+        @Html.TextBoxFor(m => m.Role)
+        @Html.ValidationMessageFor(m => m.Role)
+    </div>
+    <div>
+        <input type="submit" value="Save" />
+        <a href="/Admin/Index">Back</a>
+    </div>
+</form>

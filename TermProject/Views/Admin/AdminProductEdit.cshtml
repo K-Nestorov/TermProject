@@ -1,0 +1,54 @@
+﻿@model TermProject.ViewModels.Products.EditVM
+
+
+@{
+    this.Layout = "/Views/Shared/_Site.cshtml";
+    ViewData["title"] = "Edit Product";
+}
+
+<fieldset>
+    <legend>Edit Product</legend>
+    <form action="/Admin/AdminProductEdit" method="post">
+        @Html.HiddenFor(m => m.Id)
+
+        <div class="grid">
+            <div class="row">
+                <div class="col-1">@Html.LabelFor(m => m.ProductName)</div>
+                <div class="col-2">@Html.TextBoxFor(m => m.ProductName, new { @class = "form-control" })</div>
+                @Html.ValidationMessageFor(m => m.ProductName)
+            </div>
+
+            <div class="row">
+                <div class="col-1">@Html.LabelFor(m => m.ProductDescription)</div>
+                <div class="col-2">@Html.TextBoxFor(m => m.ProductDescription, new { @class = "form-control" })</div>
+                @Html.ValidationMessageFor(m => m.ProductDescription)
+            </div>
+
+            <div class="row">
+                <div class="col-1">@Html.LabelFor(m => m.ProductPrice)</div>
+                <div class="col-2">@Html.TextBoxFor(m => m.ProductPrice, new { @class = "form-control" })</div>
+                @Html.ValidationMessageFor(m => m.ProductPrice)
+            </div>
+
+            <div class="row">
+                <div class="col-1">@Html.LabelFor(m => m.ProductCategoryId)</div>
+                <div class="col-2">@Html.TextBoxFor(m => m.ProductCategoryId, new { @class = "form-control" })</div>
+                @Html.ValidationMessageFor(m => m.ProductCategoryId)
+            </div>
+
+            <div class="row">
+                <div class="col-1">@Html.LabelFor(m => m.ImagePath)</div>
+                <div class="col-2">@Html.TextBoxFor(m => m.ImagePath, new { @class = "form-control" })</div>
+                @Html.ValidationMessageFor(m => m.ImagePath)
+            </div>
+
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-2">
+                    <a class="btn btn-secondary right" href="/Admin/AdminProduct">Back</a>
+                    <input type="submit" class="btn btn-primary right" value="Save" />
+                </div>
+            </div>
+        </div>
+    </form>
+</fieldset>

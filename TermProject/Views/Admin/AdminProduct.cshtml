@@ -1,0 +1,28 @@
+﻿@model TermProject.ViewModels.Products.IndexVM
+@using TermProject.Entities
+@{
+    this.Layout = "/Views/Shared/_Site.cshtml";
+    ViewData["Title"] = "Admin Products Page";
+}
+
+@foreach (Products item in Model.Items)
+{
+    <div>
+        <div>Product ID: @item.Id</div>
+        <img src="/Images/@item.ImagePath" alt="Product Image" width="300px"height="200px"/>
+
+        <div>Image Path: @item.ImagePath</div>
+
+        <a href="/Admin/AdminProductEdit?Id=@item.Id">Edit</a>
+        <a href="/Admin/AdminProductDelete?Id=@item.Id">Delete</a>
+    </div>
+
+}
+<div class="row pager">
+    <div class="col-3">
+
+        @await Html.PartialAsync("/Views/Partial/PagerPartial.cshtml", Model.Pager)
+
+
+    </div>
+</div>

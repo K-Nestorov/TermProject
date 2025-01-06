@@ -1,0 +1,68 @@
+﻿
+@using TermProject.Entities;
+@using TermProject.Extensions
+@using TermProject.Filters; 
+
+@{
+    Users loggedUser = this.ViewContext.HttpContext.Session.GetObject<Users>("loggedUser");
+
+  }
+<html>
+<head>
+    <title>@ViewData["title"]</title>
+    <link href="~/site.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container header">
+        <h1 class="title">Term Project</h1>
+        <div class="welcomeMsg">
+            <span>
+                Hello,
+               
+            </span>
+        </div>
+    </div>
+    <div class="container">
+        <ul class="menu">
+
+          
+            
+            @if (loggedUser != null)
+            {
+
+                @if (loggedUser.Role.ToLower() != "admin")
+                {
+                   
+                }
+
+                else
+                {
+                    <li><a href="/Admin/Index">All users</a></li>
+                    <li><a href="/Admin/CreateUser">Create User</a></li>
+                    <li><a href="/Admin/AdminProduct">All products</a></li>
+                    <li><a href="/Admin/AdminProductCreate">Create Product</a></li>
+
+
+                }
+                <li><a href="/Home/Logout">LOGOUT</a></li>
+                <li><a href="/Cart/Index">Cart</a></li>
+                <li> <a href="/User/UserEdit">Edit </a></li>
+            }
+           else
+            {
+                <li><a href="/Home/Register">Register</a></li>
+                <li><a href="/Home/Login">LOGIN</a></li>
+               
+            }
+         
+            
+        </ul>
+    </div>
+    <div>
+    
+    </div>
+    <div class="container">
+        @RenderBody()
+    </div>
+</body>
+</html>

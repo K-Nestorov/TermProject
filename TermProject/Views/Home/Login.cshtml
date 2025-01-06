@@ -1,0 +1,29 @@
+﻿@model TermProject.ViewModels.Login.LoginVM
+
+@{
+    this.Layout = "/Views/Shared/_Site.cshtml";
+    ViewData["Title"] = "Login PAGE";
+}
+
+<fieldset>
+
+<legend>Login</legend>
+<form action="/Home/Login" method="post">  
+
+<div> @Html.LabelFor(m=>m.Username)</div>
+<div>@Html.TextBoxFor(m=>m.Username)</div>
+        <div class="ValidationMessage">  @Html.ValidationMessageFor(m => m.Username)</div>
+        <div> @Html.LabelFor(m => m.Password)</div>
+        <div>@Html.PasswordFor(m => m.Password)</div>
+        <div class="ValidationMessage">  @Html.ValidationMessageFor(m => m.Password)</div>
+
+
+<input type="submit" value="Login"/>
+</form>
+
+
+
+
+
+
+</fieldset>

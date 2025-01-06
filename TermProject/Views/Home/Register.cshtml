@@ -1,0 +1,36 @@
+﻿@model TermProject.ViewModels.Register.RegisterVM
+
+@{
+    this.Layout = "/Views/Shared/_Site.cshtml";
+    ViewData["Title"] = "Register PAGE";
+}
+
+<fieldset>
+
+    <legend>Register</legend>
+    <form action="/Home/Register" method="post">
+
+        <div> @Html.LabelFor(m => m.Name)</div>
+        <div>@Html.TextBoxFor(m => m.Name)</div>
+        <div class="ValidationMessage">  @Html.ValidationMessageFor(m => m.Name)</div>
+        <div> @Html.LabelFor(m => m.Username)</div>
+        <div>@Html.TextBoxFor(m => m.Username)</div>
+        <div class="ValidationMessage">  @Html.ValidationMessageFor(m => m.Username)</div>
+        <div> @Html.LabelFor(m => m.Password)</div>
+        <div>@Html.PasswordFor(m => m.Password)</div>
+        <div class="ValidationMessage">  @Html.ValidationMessageFor(m => m.Password)</div>
+        <div> @Html.LabelFor(m => m.Email)</div>
+        <div>@Html.TextBoxFor(m => m.Email)</div>
+        <div class="ValidationMessage">  @Html.ValidationMessageFor(m => m.Email)</div>
+
+
+        <input type="submit" value="Register" />
+    </form>
+   
+
+
+
+
+
+
+</fieldset>
